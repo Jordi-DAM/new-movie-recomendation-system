@@ -1,7 +1,6 @@
-package classes;
+package models;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class Person {
     private int id;

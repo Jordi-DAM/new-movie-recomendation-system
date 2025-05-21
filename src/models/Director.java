@@ -1,15 +1,14 @@
-package classes;
+package models;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
-public class Actor extends Person {
+public class Director extends Person {
 
-    public Actor(int id, String name, String surname, Date dateOfBirth, String nationality) {
+    public Director(int id, String name, String surname, Date dateOfBirth, String nationality) {
         super(id, name, surname, dateOfBirth, nationality);
     }
 
-    public Actor() {
+    public Director() {
 
     }
 

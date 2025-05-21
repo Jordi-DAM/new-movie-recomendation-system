@@ -21,9 +21,10 @@ public class ImpletationMovie implements CRUD {
     }
 
     @Override
-    public List getAll() {
+    public List getItems() {
         return List.of();
     }
+
 
     @Override
     public void update(Object entity) {
