@@ -1,5 +1,7 @@
 package main;
 
+import UI.UI;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -11,7 +13,7 @@ public class Main {
     }
 
     private void run() {
-        MovieRecomendationManager manager = new MovieRecomendationManager();
+        UI ui = new UI();
         Scanner sc = new Scanner(System.in);
 
         System.out.print("""
@@ -41,7 +43,7 @@ public class Main {
         }
     }
 
-    private boolean showLoginMenu(Scanner sc, MovieRecomendationManager manager) {
+    private boolean showLoginMenu(Scanner sc, UI ui) {
         while (true) {
             try {
                 System.out.print("""
@@ -59,11 +61,11 @@ public class Main {
                 sc.nextLine();
                 switch (choice) {
                     case 1:
-                        createUser(sc, manager);
+                        createUser(sc, ui);
                         enter(sc);
                         break;
                     case 2:
-                        if (login(sc, manager)) return true;
+                        if (login(sc, ui)) return true;
                         break;
                     case 3:
                         System.out.println();
@@ -80,7 +82,7 @@ public class Main {
         }
     }
 
-    private boolean showMovieMenu(Scanner sc, MovieRecomendationManager manager) {
+    private boolean showMovieMenu(Scanner sc, UI ui) {
         while (true) {
             try {
                 System.out.println("""                        
@@ -101,11 +103,11 @@ public class Main {
                 sc.nextLine();
                 switch (choice) {
                     case 1:
-                        manager.listMovies();
+                        ui.listMovies();
                         enter(sc);
                         break;
                     case 2:
-                        movieSearcher(sc, manager);
+                        movieSearcher(sc, ui);
                         enter(sc);
                         break;
                     case 3:
@@ -118,11 +120,11 @@ public class Main {
                         enter(sc);
                         break;
                     case 5:
-                        profileSearcher(sc, manager);
+                        profileSearcher(sc, ui);
                         enter(sc);
                         break;
                     case 6:
-                        manageFriendRequests(sc, manager);
+                        manageFriendRequests(sc, ui);
                         enter(sc);
                         break;
                     case 7:

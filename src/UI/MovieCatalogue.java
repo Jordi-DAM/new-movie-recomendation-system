@@ -1,3 +1,5 @@
+package UI;
+
 import models.Movie;
 import connexio.CRUD;
 import implementation.ImpletationMovie;

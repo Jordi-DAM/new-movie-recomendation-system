@@ -1,3 +1,5 @@
+package UI;
+
 public class UI {
     private MovieCatalogue movieCatalogue;
     private UsersManager usersManager;

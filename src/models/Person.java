@@ -1,15 +1,16 @@
 package models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Person {
     private int id;
     private String name;
     private String surname;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private String nationality;
 
-    public Person(int id, String name, String surname, Date dateOfBirth, String nationality) {
+    public Person(int id, String name, String surname, LocalDate dateOfBirth, String nationality) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -44,11 +45,11 @@ public class Person {
         this.surname = surname;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
