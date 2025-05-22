@@ -3,7 +3,9 @@ package ui;
 import domain.model.Movie;
 import domain.model.Person;
 import domain.service.MovieService;
+import domain.service.MovieServiceFactory;
 import domain.service.UserService;
+import domain.service.UserServiceFactory;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,8 +15,8 @@ public class UI {
     private MovieService movieService;
 
     public UI() {
-        this.movieService = new MovieService();
-        this.userService = new UserService();
+        this.movieService = MovieServiceFactory.getMovieService();
+        this.userService = UserServiceFactory.getUserService();
     }
 
     public List<Movie> getItems() {

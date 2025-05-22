@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Test {
     public static void main(String[] args) throws SQLException {
         Scanner sc = new Scanner(System.in);
-        UI ui = SingletonUI.getUi();
+        UI ui = new UI();
         System.out.println("What movie do you want?");
         int n = sc.nextInt();
         sc.nextLine();
