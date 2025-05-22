@@ -1,8 +1,8 @@
-package models;
+package domain.model;
 
 import java.util.ArrayList;
 
-public class User{
+public class User {
     private String username;
     private String mail;
     private String password;

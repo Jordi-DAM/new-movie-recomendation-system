@@ -1,6 +1,5 @@
-package models;
+package domain.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Person {
@@ -19,6 +18,16 @@ public class Person {
     }
 
     public Person() {
+    }
+
+    @Override
+    public String toString() {
+        return "ImplementationPerson{" +
+                ", Name= " + name + '\'' +
+                ", Surname= " + surname +
+                ", Date Of Birth=" + dateOfBirth +
+                ", Nationality='" + nationality + '\'' +
+                '}';
     }
 
     public int getId() {
@@ -61,13 +70,5 @@ public class Person {
         this.nationality = nationality;
     }
 
-    @Override
-    public String toString() {
-        return "ImplementationPerson{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", nationality='" + nationality + '\'' +
-                '}';
-    }
+
 }

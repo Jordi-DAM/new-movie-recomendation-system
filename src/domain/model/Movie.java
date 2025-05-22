@@ -1,4 +1,4 @@
-package models;
+package domain.model;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ import java.util.List;
 public class Movie {
     private int id;
     private String title;
-    private Director director;
-    private List<Actor> actors;
+    private Person director;
+    private List<Person> actors;
     private List<Genre> genre;
     private int year;
 
-    public Movie(int id, String title, Director director, List<Actor> actors, List<Genre> genre, int year) {
+    public Movie(int id, String title, Person director, List<Person> actors, List<Genre> genre, int year) {
         this.id = id;
         this.title = title;
         this.director = director;
@@ -27,11 +27,11 @@ public class Movie {
     @Override
     public String toString() {
         return "Movie{" +
-                "title='" + title + '\'' +
-                ", director=" + director +
-                ", actors=" + actors +
-                ", genre=" + genre +
-                ", year=" + year +
+                "Title='" + title + '\'' +
+                ", Director=" + director +
+                ", Actors=" + actors +
+                ", Genre=" + genre +
+                ", Release Year=" + year +
                 '}';
     }
 
@@ -61,19 +61,19 @@ public class Movie {
         this.title = title;
     }
 
-    public Director getDirector() {
+    public Person getDirector() {
         return director;
     }
 
-    public void setDirector(Director director) {
+    public void setDirector(Person director) {
         this.director = director;
     }
 
-    public List<Actor> getActors() {
+    public List<Person> getActors() {
         return actors;
     }
 
-    public void setActors(List<Actor> actors) {
+    public void setActors(List<Person> actors) {
         this.actors = actors;
     }
 

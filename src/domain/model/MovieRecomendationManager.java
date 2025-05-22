@@ -1,4 +1,4 @@
-package models;
+/* package domain.model;
 
 import java.time.Year;
 import java.util.*;
@@ -324,3 +324,4 @@ public class MovieRecomendationManager {
     }
 
 }
+*/

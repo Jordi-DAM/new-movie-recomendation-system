@@ -1,4 +1,4 @@
-package models;
+package domain.model;
 
 
 public class Genre {
@@ -6,6 +6,13 @@ public class Genre {
     private String name;
 
     public Genre() {
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public int getIdGenre() {

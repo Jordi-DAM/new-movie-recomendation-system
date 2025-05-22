@@ -1,21 +1,19 @@
-package implementation;
+package persistance.dao;
 
-import models.Genre;
-import connexio.CRUD;
-import connexio.Connexio;
+import domain.model.Genre;
+import persistance.db.Connection;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplementationGenre implements CRUD<Genre> {
-    private Connection con = Connexio.getConnection();
+public class DaoGenre implements CRUD<Genre> {
+    private java.sql.Connection con = Connection.getConnection();
 
     @Override
-    public int create(Genre genre) {
+    public int create(Genre genre) throws SQLException {
         String query = "INSERT INTO Genre (Name) VALUES (?)";
         int idNewGenre = -1;
         try (PreparedStatement ps = con.prepareStatement(query)) {
@@ -34,7 +32,7 @@ public class ImplementationGenre implements CRUD<Genre> {
     }
 
     @Override
-    public Genre read(int id) {
+    public Genre read(int id) throws SQLException {
         String query = "SELECT * FROM Genre WHERE GenreId = ?";
         boolean check = false;
         Genre genre = new Genre();
@@ -60,7 +58,7 @@ public class ImplementationGenre implements CRUD<Genre> {
     }
 
     @Override
-    public void update(Genre genre) {
+    public void update(Genre genre) throws SQLException {
         String query = "UPDATE Genre SET Name = ? WHERE GenreId = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, genre.getName());
@@ -72,7 +70,7 @@ public class ImplementationGenre implements CRUD<Genre> {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws SQLException {
         String query = "DELETE FROM Genre WHERE GenreId = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, id);
@@ -83,7 +81,7 @@ public class ImplementationGenre implements CRUD<Genre> {
     }
 
     @Override
-    public List<Genre> getItems() {
+    public List<Genre> getItems() throws SQLException {
         String query = "SELECT * FROM Genre";
         List<Genre> ls = new ArrayList<>();
         try (PreparedStatement ps = con.prepareStatement(query)) {

@@ -1,10 +1,8 @@
-package implementation;
+package persistance.dao;
 
-import models.Person;
-import connexio.CRUD;
-import connexio.Connexio;
+import domain.model.Person;
+import persistance.db.Connection;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,11 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImplementationPerson implements CRUD<Person> {
-    private Connection con = Connexio.getConnection();
+public class DaoPerson implements CRUD<Person> {
+    private java.sql.Connection con = Connection.getConnection();
 
     @Override
-    public int create(Person person) {
+    public int create(Person person) throws SQLException {
         String query = "INSERT INTO Person (FirstName, LastName, BirthDate, Nationality) VALUES (?, ?, ?, ?)";
         int idNewPerson = -1;
         try (PreparedStatement ps = con.prepareStatement(query)) {
@@ -38,7 +36,7 @@ public class ImplementationPerson implements CRUD<Person> {
     }
 
     @Override
-    public Person read(int id) {
+    public Person read(int id) throws SQLException {
         String query = "SELECT * FROM Person WHERE PersonId = ?";
         boolean check = false;
         Person person = new Person();
@@ -67,7 +65,7 @@ public class ImplementationPerson implements CRUD<Person> {
     }
 
     @Override
-    public void update(Person person) {
+    public void update(Person person) throws SQLException {
         String query = "UPDATE Person SET FirstName = ?, LastName = ?, BirthDate = ?, Nationality = ? WHERE PersonId = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, person.getName());
@@ -82,7 +80,7 @@ public class ImplementationPerson implements CRUD<Person> {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws SQLException {
         String query = "DELETE FROM Person WHERE PersonId = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setInt(1, id);
@@ -93,7 +91,7 @@ public class ImplementationPerson implements CRUD<Person> {
     }
 
     @Override
-    public List<Person> getItems() {
+    public List<Person> getItems() throws SQLException {
         String query = "SELECT * FROM Person";
         List<Person> ls = new ArrayList<>();
         try (PreparedStatement ps = con.prepareStatement(query)) {

@@ -1,13 +1,12 @@
-package connexio;
+package persistance.db;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Connexio {
-    static Connection con = null;
+public class Connection {
+    static java.sql.Connection con = null;
 
-    public static Connection getConnection() {
+    public static java.sql.Connection getConnection() {
         if (con == null) {
             try {
                 Class.forName("org.sqlite.JDBC");

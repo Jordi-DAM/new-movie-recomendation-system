@@ -1,6 +1,7 @@
-package main;
+/*package main;
 
-import UI.UI;
+import ui.SingletonUI;
+import ui.UI;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class Main {
     }
 
     private void run() {
-        UI ui = new UI();
+        UI ui = SingletonUI.getUi();
         Scanner sc = new Scanner(System.in);
 
         System.out.print("""
@@ -350,4 +351,4 @@ public class Main {
         System.out.print("Prem enter per continuar.\n");
         sc.nextLine();
     }
-}
+}*/
