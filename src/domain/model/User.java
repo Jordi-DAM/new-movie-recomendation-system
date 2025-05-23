@@ -3,6 +3,7 @@ package domain.model;
 import java.util.ArrayList;
 
 public class User {
+    public int id;
     private String username;
     private String mail;
     private String password;
@@ -20,7 +21,7 @@ public class User {
         friends = new ArrayList<>();
     }
 
-    public User(String username) {
+    public User() {
 
     }
 
@@ -34,6 +35,15 @@ public class User {
                 ", pendingFR=" + pendingFR +
                 ", friends=" + friends +
                 '}';
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

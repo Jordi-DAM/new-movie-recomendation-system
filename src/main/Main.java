@@ -1,8 +1,8 @@
-/*package main;
+package main;
 
-import ui.SingletonUI;
 import ui.UI;
 
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -14,7 +14,7 @@ public class Main {
     }
 
     private void run() {
-        UI ui = SingletonUI.getUi();
+        UI ui = new UI();
         Scanner sc = new Scanner(System.in);
 
         System.out.print("""
@@ -26,7 +26,7 @@ public class Main {
                 """);
 
         while (true) {
-            boolean loggedIn = showLoginMenu(sc, manager);
+            boolean loggedIn = showLoginMenu(sc, ui);
             if (!loggedIn) {
                 System.out.println("\nSortint del programa...");
                 System.out.println("Fins aviat!");
@@ -34,7 +34,7 @@ public class Main {
                 return;
             }
 
-            boolean exit = showMovieMenu(sc, manager);
+            boolean exit = showMovieMenu(sc, ui);
             if (exit) {
                 System.out.println("\nSortint del programa...");
                 System.out.println("Fins aviat!");
@@ -91,10 +91,8 @@ public class Main {
                         
                         1. Llistat de pel·lícules disponibles
                         2. Cercador de pel·lícules
-                        3. Recomanador de pel·lícules (no disponible)
                         4. El meu Perfil
                         5. Buscar perfil
-                        6. Acceptar peticions d'amistat
                         7. Tancar sessió
                         0. Sortir del programa
                         """);
@@ -104,7 +102,7 @@ public class Main {
                 sc.nextLine();
                 switch (choice) {
                     case 1:
-                        ui.listMovies();
+                        ui.getItems();
                         enter(sc);
                         break;
                     case 2:
@@ -139,6 +137,8 @@ public class Main {
             } catch (InputMismatchException e) {
                 System.out.println("\nNomés s'accepten nombres enters.");
                 sc.nextLine();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -155,7 +155,7 @@ public class Main {
         return search.matches();
     }
 
-    public static void createUser(Scanner sc, MovieRecomendationManager manager) {
+    public static void createUser(Scanner sc, UI ui) {
         String username, email, password;
 
         while (true) {
@@ -274,9 +274,9 @@ public class Main {
         }
     }
 
-    public static void movieSearcher(Scanner sc, MovieRecomendationManager manager) {
+    public static void movieSearcher(Scanner sc, UI ui) throws SQLException {
         System.out.print("\nCerca una pel·lícula: ");
-        manager.filterMovies(sc.nextLine()).forEach(System.out::println);
+        ui.readMovie(sc.nextInt());
     }
 
     public static void manageFriendRequests(Scanner sc, MovieRecomendationManager manager) {
@@ -310,7 +310,7 @@ public class Main {
         }
     }
 
-    public static void profileSearcher(Scanner sc, MovieRecomendationManager manager) {
+    public static void profileSearcher(Scanner sc, UI ui) {
         System.out.print("\nCerca un nom d'usuari: ");
         try {
             User foundUser = manager.findUserByUsername(sc.nextLine());
@@ -351,4 +351,4 @@ public class Main {
         System.out.print("Prem enter per continuar.\n");
         sc.nextLine();
     }
-}*/
+}
