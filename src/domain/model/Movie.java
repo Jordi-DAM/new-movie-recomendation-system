@@ -1,6 +1,7 @@
 package domain.model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Movie {
@@ -26,14 +27,17 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "Title='" + title + '\'' +
-                ", Director=" + director +
-                ", Actors=" + actors +
-                ", Genre=" + genre +
-                ", Release Year=" + year +
-                '}';
+        return "\nTítol: " + title +
+                "\nDirector: " + director.getName() + " " + director.getSurname() +
+                "\nActors: " + actors.stream()
+                .map(actor -> actor.getName() + " " + actor.getSurname())
+                .collect(Collectors.joining(", ")) +
+                "\nGèneres: " + genre.stream()
+                .map(Genre::getName)
+                .collect(Collectors.joining(", ")) +
+                "\nAny: " + year + "\n";
     }
+
 
     public int getId() {
         return id;

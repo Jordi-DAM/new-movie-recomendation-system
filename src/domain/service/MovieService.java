@@ -26,8 +26,8 @@ public class MovieService {
         return daoMovie.read(id);
     }
 
-    public List<Movie> readMovieByActor(Person actor) throws SQLException {
-        return daoMovie.readByActor(actor);
+    public List<Movie> readMovieByActor(int id) throws SQLException {
+        return daoMovie.readByActor(id);
     }
 
     public Person readPerson(int id) throws SQLException {

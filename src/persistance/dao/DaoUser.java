@@ -16,13 +16,12 @@ public class DaoUser implements CRUD<User> {
 
     @Override
     public int create(User user) throws SQLException {
-        String query = "INSERT INTO USER (Username, Password, Email, Favourite_Movie) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO USER (Username, Password, Email) VALUES (?, ?, ?)";
         int idNewUser = -1;
         try (PreparedStatement ps = con.prepareStatement(query)) {
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getMail());
-            ps.setInt(4, user.getFavouriteMovie().getId());
             ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 rs.next();
@@ -63,6 +62,87 @@ public class DaoUser implements CRUD<User> {
         } else {
             return null;
         }
+    }
+
+    public User readUserByUsername(String username) throws SQLException {
+        String query = "SELECT * FROM USER WHERE Username = ?";
+        boolean check = false;
+        User user = new User();
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    check = true;
+                    user.setId(rs.getInt("UserId"));
+                    user.setUsername(rs.getString("Username"));
+                    user.setPassword(rs.getString("Password"));
+                    user.setMail(rs.getString("Email"));
+                    user.setFavouriteMovie(new DaoMovie().read(rs.getInt("Favourite_Movie")));
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if (check) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    public Boolean checkUsernameAvailability(String username) throws SQLException {
+        String query = "SELECT * FROM USER WHERE Username = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return false;
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
+
+    public Boolean checkEmailAvailability(String email) throws SQLException {
+        String query = "SELECT * FROM USER WHERE Email = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return false;
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
+
+    public Boolean checkPasswordForUser(String username, String password) throws SQLException {
+        String query = "SELECT Password FROM USER WHERE Username = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    if (password.equals(rs.getString("Password"))) {
+                        return true;
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     @Override

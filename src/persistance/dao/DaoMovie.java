@@ -71,7 +71,7 @@ public class DaoMovie implements CRUD<Movie> {
 
     }
 
-    public ArrayList<Movie> readByActor(Person actor) throws SQLException {
+    public ArrayList<Movie> readByActor(int id) throws SQLException {
         String query = "SELECT M.MovieId, M.Title ,M.Director, M.Year, AM.ActorId as actor FROM MOVIE M\n" +
                 "JOIN Actor_Movie AM ON AM.MovieId = M.MovieId\n" +
                 "WHERE AM.ActorId = ? \n" +
@@ -80,7 +80,7 @@ public class DaoMovie implements CRUD<Movie> {
         ArrayList<Movie> movies = new ArrayList<>();
         boolean check = false;
         try (PreparedStatement ps = con.prepareStatement(query)) {
-            ps.setInt(1, actor.getId());
+            ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Movie movie = new Movie();
